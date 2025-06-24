@@ -26,4 +26,8 @@ function Matrix = CreateStartingWorld(Cols,Rows);
   Matrix((end-GRONDLAYER+1):end,1:end) = 1;
 end
 
-CreateStartingWorld(25,25)
+function Matrix = FallingSeed(Matrix);
+  % zorg ervoor dat de zand valt
+  
+end
+
