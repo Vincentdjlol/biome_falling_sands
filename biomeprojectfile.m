@@ -7,3 +7,14 @@ clear all;
 %   2 = "zaad"
 %   3 = "plant"
 %   4 = "dood plant"
+
+% -- Functions --
+
+function Matrix = CreateStartingWorld(Cols,Rows);
+  GRONDLAYER = 3;
+
+  Matrix = zeros(Cols,Rows);
+  Matrix((end-GRONDLAYER+1):end,1:end) = 1;
+end
+
+CreateStartingWorld(25,25)
