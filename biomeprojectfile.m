@@ -8,6 +8,15 @@ clear all;
 %   3 = "plant"
 %   4 = "dood plant"
 
+% -- Variabele --
+
+COLS = 30;
+ROWS = 100;
+
+
+
+
+
 % -- Functions --
 
 function Matrix = CreateStartingWorld(Cols,Rows);
