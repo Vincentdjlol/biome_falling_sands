@@ -56,7 +56,7 @@ mid_y = round((top + bottom) / 2);
 
 ## Functions ##
 
-function world = GrowPlantAndSeeds(world):
+function world = GrowPlantAndSeeds(world);
   % plant groeit -- kan nog dat je dit kan verandern
   GROWSPEED1 = 50;
   SEEDSPEED2 = 5000;
