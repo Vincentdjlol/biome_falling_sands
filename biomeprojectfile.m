@@ -82,11 +82,9 @@ function world = GrowPlantAndSeeds(world):
       % groei aan lings, rechst of midden op random.
       Kant = randi(1,3)
       world(Kant,Col-1) = 3;
-    elseif 
-      
-      
+    elseif world(Row2, Col2) = 3;
+      world(Row2, Col2) = 2;
     end
-    
     
   end
 end
