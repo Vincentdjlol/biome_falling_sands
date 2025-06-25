@@ -92,8 +92,14 @@ function world = GrowPlantAndSeeds(world);
     elseif world(Row2, Col2) = 3;
       world(Row2, Col2) = 2;
     end
-    
   end
+end
+
+function world = KillPlant(world);
+  % planter gaan dood als er een zaad of een dood plant naast zit.
+  
+  world([end 1:end 1],[end 1:end 1]) == 2 & 
+        [end 1:end 1],[end 1:end 1]) == 4) = 4;
 end
 
 ## main script ##
