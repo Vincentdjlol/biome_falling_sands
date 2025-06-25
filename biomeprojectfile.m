@@ -15,12 +15,12 @@ right = COLS - margin;
 top = margin;
 bottom = ROWS - margin;
 
+% muren
 world(top:bottom, left) = WALL;
 world(top:bottom, right) = WALL;
 world(bottom, left:right) = WALL;
 world(top, left:right) = WALL;
 
-% grote laag zand onderaan
 world(bottom-20:bottom-1, (left+1):(right-1)) = SAND;
 
 sand_colors = [
@@ -83,8 +83,7 @@ while ishandle(fig) && ~isappdata(fig, "stop_simulation")
         tmp(mask) = EMPTY;
         world(y_range, x_range) = tmp;
         set(muurk, "String", "Muur uit");
-
-  endif
+    endif
 
     if isappdata(fig, "change_color") && getappdata(fig, "change_color")
         sand_color_index = sand_color_index + 1;
@@ -119,7 +118,6 @@ while ishandle(fig) && ~isappdata(fig, "stop_simulation")
             endif
         endfor
     endfor
-
 
     world = new_world;
     generation = generation + 1;
