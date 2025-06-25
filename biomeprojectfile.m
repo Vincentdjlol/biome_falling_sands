@@ -56,14 +56,14 @@ mid_y = round((top + bottom) / 2);
 
 ## Functions ##
 
-function newworld = GrowPlant(world):
+function world = GrowPlant(world):
   % plant groeit
   GROWSPEED = 50;
 
   % filteren van planten
-  Mask = (Matrix == 3);
+  Mask = (world == 3);
   %Nums = sum(Mask(:)); % tel de hoeveelheid die groeit
-  Vals = randi(GROWSPEED, size(Matrix));
+  Vals = randi(GROWSPEED, size(world));
   Acti = (Mask & (Vals == 1));
 
   % Toon posities waar de actie wordt uitgevoerd
@@ -72,10 +72,10 @@ function newworld = GrowPlant(world):
   % groei van planten
   for Index = 1:length(Row);
     % chek of boved de pant niets is anders groeit het niet.
-    if sum(Matrix((Row-1):(Row+1),Col-1)) = 0;
+    if sum(world((Row-1):(Row+1),Col-1)) = 0;
       % groei aan lings, rechst of midden op random.
       Kant = randi(1,3)
-      Matrix(Kant,Col-1) = 3;
+      world(Kant,Col-1) = 3;
     end
   end
 end
