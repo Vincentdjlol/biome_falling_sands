@@ -20,8 +20,7 @@ world(top:bottom, right) = WALL;
 world(bottom, left:right) = WALL;
 world(top, left:right) = WALL;
 
-sand_height = round((bottom - top + 1) / 4);
-world((bottom - sand_height):(bottom - 1), (left+1):(right-1)) = SAND;
+world(bottom-20:bottom-1, (left+1):(right-1)) = SAND;
 
 sand_colors = [
     1.0, 0.8, 0.2;  % geel
@@ -33,18 +32,20 @@ sand_color_index = 1;
 
 fig = figure("Name", "Falling Sand", "NumberTitle", "off", "MenuBar", "none");
 set(fig, "Position", [100, 100, 1000, 700]);
+
 colormap([1 1 1; sand_colors(sand_color_index, :); 0.3 0.3 0.3]);
 
-uicontrol("Style", "pushbutton", "String", "Sluit", "Position", [20 20 60 30],
+uicontrol("Style", "pushbutton", "String", "Sluit", "Position", [20 20 60 30], ...
     "Callback", @(src, event) setappdata(fig, "stop_simulation", true));
-uicontrol("Style", "pushbutton", "String", "Reset", "Position", [100 20 60 30],
+uicontrol("Style", "pushbutton", "String", "Reset", "Position", [100 20 60 30], ...
     "Callback", @(src, event) setappdata(fig, "do_reset", true));
-muurk = uicontrol("Style", "togglebutton", "String", "Muur uit",
+muurk = uicontrol("Style", "togglebutton", "String", "Muur uit", ...
     "Position", [260 20 90 30], "Value", 0, "Callback", @(src, event) []);
-kleurk = uicontrol("Style", "pushbutton", "String", "Verander kleur",
+kleurk = uicontrol("Style", "pushbutton", "String", "Verander kleur", ...
     "Position", [360 20 100 30], "Callback", @(src, event) setappdata(fig, "change_color", true));
+strooik = uicontrol("Style", "togglebutton", "String", "Strooi zand", ...
+    "Position", [480 20 100 30], "Value", 0);
 
-stop_simulation = false;
 generation = 0;
 
 block_size = 6;
@@ -59,7 +60,7 @@ while ishandle(fig) && ~isappdata(fig, "stop_simulation")
         world(top:bottom, right) = WALL;
         world(bottom, left:right) = WALL;
         world(top, left:right) = WALL;
-        world(bottom-1, (left+1):(right-1)) = SAND;
+        world(bottom-20:bottom-1, (left+1):(right-1)) = SAND;
         generation = 0;
         rmappdata(fig, "do_reset");
         set(muurk, "Value", 0);
@@ -118,14 +119,8 @@ while ishandle(fig) && ~isappdata(fig, "stop_simulation")
     endfor
 
     world = new_world;
-    generation += 1;
-
-    %if mod(generation, 5) == 0
-        %x_drop = round((left + right)/2);
-        %if world(top+1, x_drop) == EMPTY
-            %world(top+1, x_drop) = SAND;
-        %endif
-    %endif
+    generation = generation + 1;
 
 endwhile
+
 close(fig);
