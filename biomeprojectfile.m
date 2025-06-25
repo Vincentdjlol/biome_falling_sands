@@ -53,6 +53,35 @@ block_size = 6;
 mid_x = round((left + right) / 2);
 mid_y = round((top + bottom) / 2);
 
+
+## Functions ##
+
+function newworld = GrowPlant(world):
+  % plant groeit
+  GROWSPEED = 50;
+
+  % filteren van planten
+  Mask = (Matrix == 3);
+  %Nums = sum(Mask(:)); % tel de hoeveelheid die groeit
+  Vals = randi(GROWSPEED, size(Matrix));
+  Acti = (Mask & (Vals == 1));
+
+  % Toon posities waar de actie wordt uitgevoerd
+  [Row, Col] = find(Acti);
+
+  % groei van planten
+  for Index = 1:length(Row);
+    % chek of boved de pant niets is anders groeit het niet.
+    if sum(Matrix((Row-1):(Row+1),Col-1)) = 0;
+      % groei aan lings, rechst of midden op random.
+      Kant = randi(1,3)
+      Matrix(Kant,Col-1) = 3;
+    end
+  end
+end
+
+## main script ##
+
 while ishandle(fig) && ~isappdata(fig, "stop_simulation")
 
     if isappdata(fig, "do_reset") && getappdata(fig, "do_reset")
