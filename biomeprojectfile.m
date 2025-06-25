@@ -56,27 +56,38 @@ mid_y = round((top + bottom) / 2);
 
 ## Functions ##
 
-function world = GrowPlant(world):
-  % plant groeit
-  GROWSPEED = 50;
+function world = GrowPlantAndSeeds(world):
+  % plant groeit -- kan nog dat je dit kan verandern
+  GROWSPEED1 = 50;
+  SEEDSPEED2 = 5000;
 
   % filteren van planten
   Mask = (world == 3);
+  
   %Nums = sum(Mask(:)); % tel de hoeveelheid die groeit
-  Vals = randi(GROWSPEED, size(world));
-  Acti = (Mask & (Vals == 1));
+  Vals1 = randi(GROWSPEED, size(world));
+  Vals2 = randi(SEEDSPEED, size(world));
+  
+  Acti1 = (Mask & (Vals == 1));
+  Acti2 = (Mask & (Vals == 1));
 
-  % Toon posities waar de actie wordt uitgevoerd
-  [Row, Col] = find(Acti);
-
+  % alle posities waar de actie wordt uitgevoerd
+  [Row1, Col1] = find(Acti1);
+  [Row2, Col2] = find(Acti2);
+  
   % groei van planten
-  for Index = 1:length(Row);
+  for Index = 1:nnz(Mask);
     % chek of boved de pant niets is anders groeit het niet.
-    if sum(world((Row-1):(Row+1),Col-1)) = 0;
+    if sum(world((Row1-1):(Row1+1),Col1-1)) = 0;
       % groei aan lings, rechst of midden op random.
       Kant = randi(1,3)
       world(Kant,Col-1) = 3;
+    elseif 
+      
+      
     end
+    
+    
   end
 end
 
