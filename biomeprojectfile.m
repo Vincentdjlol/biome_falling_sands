@@ -1,12 +1,5 @@
 clear all;
 
-%-- Fazes --
-%   0 = "lucht"
-%   1 = "grond"
-%   2 = "zaad"
-%   3 = "plant"
-%   4 = "dood plant"
-
 ROWS = 120;
 COLS = 180;
 
@@ -51,58 +44,12 @@ muurk = uicontrol("Style", "togglebutton", "String", "Muur uit", ...
     "Position", [260 20 90 30], "Value", 0, "Callback", @(src, event) []);
 kleurk = uicontrol("Style", "pushbutton", "String", "Verander kleur", ...
     "Position", [360 20 100 30], "Callback", @(src, event) setappdata(fig, "change_color", true));
-strooik = uicontrol("Style", "togglebutton", "String", "Strooi zand", ...
-    "Position", [480 20 100 30], "Value", 0);
 
 generation = 0;
 
 block_size = 6;
 mid_x = round((left + right) / 2);
 mid_y = round((top + bottom) / 2);
-
-
-## Functions ##
-
-function world = GrowPlantAndSeeds(world);
-  % plant groeit -- kan nog dat je dit kan verandern
-  GROWSPEED1 = 50;
-  SEEDSPEED2 = 5000;
-
-  % filteren van planten
-  Mask = (world == 3);
-  
-  %Nums = sum(Mask(:)); % tel de hoeveelheid die groeit
-  Vals1 = randi(GROWSPEED, size(world));
-  Vals2 = randi(SEEDSPEED, size(world));
-  
-  Acti1 = (Mask & (Vals == 1));
-  Acti2 = (Mask & (Vals == 1));
-
-  % alle posities waar de actie wordt uitgevoerd
-  [Row1, Col1] = find(Acti1);
-  [Row2, Col2] = find(Acti2);
-  
-  % groei van planten
-  for Index = 1:nnz(Mask);
-    % chek of boved de pant niets is anders groeit het niet.
-    if sum(world((Row1-1):(Row1+1),Col1-1)) = 0;
-      % groei aan lings, rechst of midden op random.
-      Kant = randi(1,3)
-      world(Kant,Col-1) = 3;
-    elseif world(Row2, Col2) = 3;
-      world(Row2, Col2) = 2;
-    end
-  end
-end
-
-function world = KillPlant(world);
-  % planter gaan dood als er een zaad of een dood plant naast zit.
-  
-  world([end 1:end 1],[end 1:end 1]) == 2 & 
-        [end 1:end 1],[end 1:end 1]) == 4) = 4;
-end
-
-## main script ##
 
 while ishandle(fig) && ~isappdata(fig, "stop_simulation")
 
