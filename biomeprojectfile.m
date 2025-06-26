@@ -7,6 +7,7 @@ EMPTY = 0;
 SAND = 1;
 WALL = 2;
 SEED = 3;
+PLANT = 4;
 
 world = zeros(ROWS, COLS);
 
@@ -30,6 +31,7 @@ sand_colors = [
     0.0, 0.0, 1.0;  % blauw
     0.0, 1.0, 0.0]; % groen
 seed_color = [0.6, 0.3, 0.0];  % bruin
+plant_color = [];
 
 sand_color_index = 1;
 
@@ -110,7 +112,7 @@ while ishandle(fig) && ~isappdata(fig, "stop_simulation")
         rmappdata(fig, "place_seed");
     endif
 
-    imagesc(world);
+    imagesc(world, [0, 4]);
     axis off;
     axis image;
     title(["generation ", int2str(generation)]);
